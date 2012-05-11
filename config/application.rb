@@ -48,6 +48,9 @@ module Quipper
     config.generators do |g|
       g.assets false
       g.helper false
+      g.test_framework :mini_test, :spec => true, :fixture => true
+      g.integration_tool :mini_test
+      g.fixture_replacement :fabrication
     end
 
 

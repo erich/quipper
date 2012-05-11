@@ -4,7 +4,7 @@ gem "rails", "3.2.3"
 gem "jquery-rails"
 
 gem "bson_ext"
-gem "haml"
+gem "haml","3.1.4"
 gem "mongoid"
 gem "twitter-bootstrap-rails"
 
@@ -13,6 +13,7 @@ group :development do
   gem "puma"
   gem "quiet_assets"
   gem "therubyracer"
+  gem "tork"
 end
 
 group :test do
@@ -20,7 +21,9 @@ group :test do
   gem "fabrication"
   gem "faker"
   gem "minitest"
+  gem "minitest-rails", git: "https://github.com/erich/minitest-rails.git"
   gem "mongoid-minitest"
+  gem "factory_girl_rails"
 end
 
 group :production do
