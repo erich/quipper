@@ -7,6 +7,7 @@ gem "bson_ext"
 gem "haml","3.1.4"
 gem "mongoid"
 gem "twitter-bootstrap-rails"
+gem "activevalidators"
 
 group :development do
   gem "haml-rails"

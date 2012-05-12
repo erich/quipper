@@ -7,11 +7,23 @@ describe User do
   # fixtures :all
 
   before do
-    @user = User.new
+    @john = User.new
   end
 
-  it "must be valid" do
-    @user.valid?.must_equal true
+  it 'must be invalid if blank' do
+    @john.valid?.must_equal false
   end
 
+
+  it 'must invalid with invalid email' do
+    @john.email = 'asasdfas'
+    @john.name = 'John Smith'
+    @john.valid?.must_equal false
+  end
+
+  it 'must be valid with name and valid email' do
+    @john.email = 'john@example.com'
+    @john.name = 'John Smith'
+    @john.valid?.must_equal true
+  end
 end
