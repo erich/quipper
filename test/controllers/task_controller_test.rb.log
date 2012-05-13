@@ -1,0 +1,7 @@
+test/controllers/task_controller_test.rb:3:in `<top (required)>': uninitialized constant TaskController (NameError)
+	from /Users/erich/.rvm/gems/ruby-1.9.3-p194@quipper/gems/tork-18.2.0/lib/tork/master.rb:61:in `load'
+	from /Users/erich/.rvm/gems/ruby-1.9.3-p194@quipper/gems/tork-18.2.0/lib/tork/master.rb:61:in `block in test'
+	from /Users/erich/.rvm/gems/ruby-1.9.3-p194@quipper/gems/tork-18.2.0/lib/tork/master.rb:39:in `fork'
+	from /Users/erich/.rvm/gems/ruby-1.9.3-p194@quipper/gems/tork-18.2.0/lib/tork/master.rb:39:in `test'
+	from /Users/erich/.rvm/gems/ruby-1.9.3-p194@quipper/gems/tork-18.2.0/lib/tork/server.rb:22:in `block in loop'
+	from /Users/erich/.rvm/gems/ruby-1.9.3-p194@quipper/gems/tork-18.2.0/lib/tork/client.rb:29:in `block in initialize'
