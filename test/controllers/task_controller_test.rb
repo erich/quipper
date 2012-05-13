@@ -1,55 +1,48 @@
 require "minitest_helper"
 
-describe TaskController do
+describe TasksController do
 
-  subject { TaskController }
+  subject { TasksController }
 
-  # fixtures :all
 
   before do
-    @task = tasks(:one)
+    @task = Fabricate(:task)
   end
 
   it "must get index" do
     get :index
-    assert_response :success
-    assert_not_nil assigns(:tasks)
+    @response.status.must_equal 200
   end
 
   it "must get new" do
     get :new
     assert_response :success
+    @response.status.must_equal 200
   end
 
   it "must create task" do
-    assert_difference('Task.count') do
-      post :create, task: @task.attributes
-    end
-
-    assert_redirected_to task_path(assigns(:task))
+    post :create, task: @task.attributes
+    @response.status.must_equal 302
   end
 
   it "must show task" do
     get :show, id: @task.to_param
-    assert_response :success
+    @response.status.must_equal 200
   end
 
   it "must get edit" do
     get :edit, id: @task.to_param
-    assert_response :success
+    @response.status.must_equal 200
   end
 
   it "must update task" do
     put :update, id: @task.to_param, task: @task.attributes
-    assert_redirected_to task_path(assigns(:task))
+    @response.status.must_equal 302
   end
 
   it "must destroy task" do
-    assert_difference('Task.count', -1) do
-      delete :destroy, id: @task.to_param
-    end
-
-    assert_redirected_to tasks_path
+    delete :destroy, id: @task.to_param
+    @response.status.must_equal 302
   end
 
 end
