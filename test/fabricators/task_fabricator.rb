@@ -1,4 +1,4 @@
 Fabricator(:task) do
   name "MyString"
-  deadline ""
+  deadline Time.now
 end

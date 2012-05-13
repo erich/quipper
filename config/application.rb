@@ -50,7 +50,7 @@ module Quipper
       g.helper false
       g.test_framework :mini_test, :spec => true, :fixture => true
       g.integration_tool :mini_test
-      g.fixture_replacement :fabrication
+      g.fixture_replacement :fabrication, :dir => "test/fabricators"
     end
 
 
