@@ -24,7 +24,9 @@ group :test do
   gem "minitest"
   gem "minitest-rails", git: "https://github.com/erich/minitest-rails.git"
   gem "mongoid-minitest"
-  gem "factory_girl_rails"
+  gem "capybara"
+  gem "capybara_minitest_spec"
+  gem "launchy"
 end
 
 group :production do

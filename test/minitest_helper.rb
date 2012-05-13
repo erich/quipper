@@ -1,12 +1,9 @@
-require "minitest/autorun"
-require "minitest/rails"
-require "minitest/pride"
-
-# Uncomment if you want awesome colorful output
-# require "minitest/pride"
-
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
+require "minitest/autorun"
+require "capybara/rails"
+require "minitest/rails"
+require "minitest/pride"
 
 class MiniTest::Rails::Spec
   # Uncomment if you want to support fixtures for all specs
@@ -39,8 +36,13 @@ class MiniTest::Rails::Controller
   # Add methods to be used by controller specs here...
 
 end
-
 MiniTest::Spec.register_spec_type(/Controller$/, MiniTest::Rails::Controller)
+
+class AcceptanceSpec < MiniTest::Spec
+  include Rails.application.routes.url_helpers
+  include Capybara::DSL
+end
+MiniTest::Spec.register_spec_type /Acceptance$/, AcceptanceSpec
 
 class MiniTest::Rails::Helper
 
@@ -57,6 +59,6 @@ class MiniTest::Rails::Mailer
 end
 
 MiniTest::Spec.register_spec_type(MiniTest::Rails::Mailer) do |desc|
-  desc.superclass == ActionMailer::Base
+  #desc.superclass == ActionMailer::Base
 end
 
