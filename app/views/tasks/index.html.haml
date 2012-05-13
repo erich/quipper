@@ -1,5 +1,7 @@
 %h1 Listing tasks
 
+= render 'form'
+
 %table
   %tr
     %th Name
@@ -17,5 +19,3 @@
       %td= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete
 
 %br
-
-= link_to 'New Task', new_task_path
