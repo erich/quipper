@@ -80,4 +80,13 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def filter
+    @tasks = Task.filter
+    @task = Task.new
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @tasks }
+    end
+  end
 end

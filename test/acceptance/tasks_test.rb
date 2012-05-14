@@ -9,5 +9,10 @@ describe "TasksAcceptance" do
     click_button 'Save'
     page.must_have_content('Mown the lawn')
   end
-
+  it 'is filtered' do
+    visit tasks_path
+    check 'Completed'
+    click_button 'Filter'
+    page.must_have_content('Completed task')
+  end
 end

@@ -1,0 +1,9 @@
+= form_tag filter_tasks_path do |f|
+  .field
+    = label_tag 'completed'
+    = check_box_tag :completed
+  .field
+    = label_tag 'After deadline'
+    = check_box_tag :after_deadline
+  .actions
+    = submit_tag 'Filter'
