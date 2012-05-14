@@ -42,22 +42,20 @@ describe Task do
   end
 
   it 'must filter after deadline' do
-    @after_deadline = Fabricate(:task, deadline: Time.now.utc.beginning_of_week)
-    params = {deadline: true}
-    Task.filter(params).must_include @after_deadline
-  end
-
-  it 'must filter before deadline' do
+    @after_deadline = Fabricate(:task, deadline: Time.now.utc.beginning_of_month)
     @before_deadline = Fabricate(:task, deadline: Time.now.utc.next_week)
     params = {deadline: true}
+    Task.filter(params).must_include @after_deadline
     Task.filter(params).wont_include @before_deadline
   end
 
   it 'must filter completed and after deadline tasks' do
     @completed_after_deadline_task = Fabricate(:task, completed: true, deadline: Time.now.utc.beginning_of_week)
+    @completed_before_deadline_task = Fabricate(:task, completed: true, deadline: Time.now.utc.next_week)
     @uncompleted_task = Fabricate(:task)
     params = {deadline: true, completed: true}
     Task.filter(params).wont_include @uncompleted_task
+    Task.filter(params).wont_include @completed_before_deadline
     Task.filter(params).must_include @completed_after_deadline_task
   end
 

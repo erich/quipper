@@ -12,6 +12,26 @@ class Task
   def self.default_scope
     order('created_at ASC').order('completed')
   end
+
+  def self.completed
+    where(completed: true)
+  end
+
+  def self.uncompleted
+    where(completed: false)
+  end
+
+  def self.after_deadline
+    where(:deadline.lte => Time.now.utc.beginning_of_day)
+  end
+
   def self.filter(params)
+    if params[:completed]
+      self.completed
+    elsif params[:deadline]
+      self.after_deadline
+    else 
+      all
+    end
   end
 end
