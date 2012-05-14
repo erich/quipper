@@ -82,10 +82,10 @@ class TasksController < ApplicationController
   end
 
   def filter
-    @tasks = Task.filter
+    @tasks = Task.filter(params)
     @task = Task.new
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :index }
       format.json { render json: @tasks }
     end
   end

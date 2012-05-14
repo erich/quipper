@@ -9,7 +9,9 @@ describe "TasksAcceptance" do
     click_button 'Save'
     page.must_have_content('Mown the lawn')
   end
+
   it 'is filtered' do
+    Fabricate(:task, name: 'Completed task', completed: true)
     visit tasks_path
     check 'Completed'
     click_button 'Filter'
