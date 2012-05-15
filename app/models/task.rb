@@ -1,6 +1,9 @@
 class Task
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Searchable
+
+  searchable :name
 
   field :name, type: String
   field :deadline, type: DateTime

@@ -8,6 +8,7 @@ gem "haml","3.1.4"
 gem "mongoid"
 gem "twitter-bootstrap-rails"
 gem "activevalidators"
+gem "mongoid-searchable"
 
 group :development do
   gem "haml-rails"

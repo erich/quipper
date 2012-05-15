@@ -86,4 +86,10 @@ describe Task do
     stats[:after_deadline].must_equal 1
     stats[:active].must_equal 1
   end
+
+  it 'must be searchable' do
+    Fabricate(:task)
+    Fabricate(:task, name: 'Wow')
+    Task.text_search('ow').count.must_equal 1
+  end
 end
