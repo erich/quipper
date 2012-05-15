@@ -74,4 +74,16 @@ describe Task do
     @task = Fabricate.build(:task, :deadline => '29/02/2001')
     @task.valid?.must_equal false
   end
+
+  it 'must have simple statistics for all users' do
+    @task = Fabricate(:task)
+    @completed_after_deadline_task = Fabricate(:task, completed: true)
+    @completed_after_deadline_task.update_attribute(:deadline, Time.now.utc.beginning_of_week)
+    stats = Task.statistics
+    stats[:all].must_equal 2
+    stats[:completed].must_equal 1
+    stats[:uncompleted].must_equal 1
+    stats[:after_deadline].must_equal 1
+    stats[:active].must_equal 1
+  end
 end

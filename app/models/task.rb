@@ -21,8 +21,36 @@ class Task
     where(completed: false)
   end
 
+  def self.count_completed
+    self.completed.count
+  end
+
+  def self.count_not_completed
+    self.uncompleted.count
+  end
+
   def self.after_deadline
     where(:deadline.lte => Time.now.utc.beginning_of_day)
+  end
+
+  def self.before_deadline
+    where(:deadline.gt => Time.now.utc.beginning_of_day)
+  end
+
+  def self.count_after_deadline
+    self.after_deadline.count
+  end
+
+  def self.count_before_deadline
+    self.before_deadline.count
+  end
+
+  def self.active
+    uncompleted.before_deadline.count
+  end
+
+  def self.active
+    self.active.count
   end
 
   def self.filter(params)
@@ -33,5 +61,15 @@ class Task
     else 
       all
     end
+  end
+
+  def self.statistics
+    {
+      all: count, 
+      completed: count_completed, 
+      uncompleted: count_not_completed, 
+      after_deadline: count_after_deadline,
+      active: count_before_deadline
+    }
   end
 end

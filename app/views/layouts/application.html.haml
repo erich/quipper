@@ -38,13 +38,15 @@
             = yield
           .span3
             .well.sidebar-nav
-              %h3 Sidebar
+              %h3 Statistics
               %ul.nav.nav-list
-                %li.nav-header Sidebar
-                %li= link_to "Link 1", "/path1"
-                %li= link_to "Link 2", "/path2"
-                %li= link_to "Link 3", "/path3"
-    
+                %li.nav-header For all users
+                %li= "All tasks: #{@stats[:all]}"
+                %li= "Completed tasks: #{@stats[:completed]}"
+                %li= "Tasks to be done: #{@stats[:uncompleted]}"
+                %li= "Task after deadline: #{@stats[:after_deadline]}"
+                %li= "Active tasks: #{@stats[:active]}"
+
       %footer
         %p &copy; Company 2012
     /
