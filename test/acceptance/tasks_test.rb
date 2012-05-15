@@ -6,7 +6,7 @@ describe "TasksAcceptance" do
     user = Fabricate(:user)
     visit user_tasks_path(user)
     fill_in 'Name', with: 'Mown the lawn'
-    fill_in 'Deadline', with: '15/05/2012'
+    fill_in 'Deadline', with: Date.today+1.hour
     click_button 'Save'
     page.must_have_content('John Smith')
     page.must_have_content('Mown the lawn')

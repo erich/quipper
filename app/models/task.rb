@@ -7,7 +7,7 @@ class Task
   field :completed, type: Boolean, default: false
 
   validates :name, presence: true
-  validates :deadline, presence: true
+  validates :deadline, presence: true, :date => {:after => Date.today}
 
   def self.default_scope
     order('created_at ASC').order('completed')

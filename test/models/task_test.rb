@@ -42,7 +42,8 @@ describe Task do
   end
 
   it 'must filter after deadline' do
-    @after_deadline = Fabricate(:task, deadline: Time.now.utc.beginning_of_month)
+    @after_deadline = Fabricate(:task)
+    @after_deadline.update_attribute(:deadline, Time.now.utc.beginning_of_month)
     @before_deadline = Fabricate(:task, deadline: Time.now.utc.next_week)
     params = {deadline: true}
     Task.filter(params).must_include @after_deadline
@@ -50,7 +51,8 @@ describe Task do
   end
 
   it 'must filter completed and after deadline tasks' do
-    @completed_after_deadline_task = Fabricate(:task, completed: true, deadline: Time.now.utc.beginning_of_week)
+    @completed_after_deadline_task = Fabricate(:task, completed: true)
+    @completed_after_deadline_task.update_attribute(:deadline, Time.now.utc.beginning_of_week)
     @completed_before_deadline_task = Fabricate(:task, completed: true, deadline: Time.now.utc.next_week)
     @uncompleted_task = Fabricate(:task)
     params = {deadline: true, completed: true}
@@ -61,9 +63,15 @@ describe Task do
 
   it 'wont filter any task' do
     @task = Fabricate(:task)
-    @completed_after_deadline_task = Fabricate(:task, completed: true, deadline: Time.now.utc.beginning_of_week)
+    @completed_after_deadline_task = Fabricate(:task, completed: true)
+    @completed_after_deadline_task.update_attribute(:deadline, Time.now.utc.beginning_of_week)
     params = {completed: false, deadline: false}
     Task.filter(params).must_include @completed_after_deadline_task
     Task.filter(params).must_include @task
+  end
+
+  it 'must validate deadline date (it should not be possible to add date which is older than date today)' do
+    @task = Fabricate.build(:task, :deadline => '29/02/2001')
+    @task.valid?.must_equal false
   end
 end
