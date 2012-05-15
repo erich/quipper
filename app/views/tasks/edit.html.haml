@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', @task
+= link_to 'Delete', user_task_path(@user, @task), :confirm => 'Are you sure?', :method => :delete
 \|
-= link_to 'Back', tasks_path
+= link_to 'Back', user_tasks_path(@user)

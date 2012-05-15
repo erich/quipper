@@ -7,6 +7,6 @@
   %b Deadline:
   = @task.deadline
 
-= link_to 'Edit', edit_task_path(@task)
+= link_to 'Edit', edit_user_task_path(@user, @task)
 \|
-= link_to 'Back', tasks_path
+= link_to 'Back', user_tasks_path(@user)

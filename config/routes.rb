@@ -1,11 +1,12 @@
 Quipper::Application.routes.draw do
-  resources :tasks do 
-    collection do
-      post 'filter'
+
+  resources :users do
+    resources :tasks do 
+      collection do
+        post 'filter'
+      end
     end
   end
-
-  resources :users
 
   root to: "users#index"
 end

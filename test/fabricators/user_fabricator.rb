@@ -1,4 +1,4 @@
 Fabricator(:user) do
-  name "MyString"
+  name "John Smith"
   email "john.smith@example.com"
 end

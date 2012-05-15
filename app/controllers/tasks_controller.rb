@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_filter :get_user
   # GET /tasks
   # GET /tasks.json
   def index
@@ -44,7 +45,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to user_tasks_path(@user), notice: 'Task was successfully created.' }
         format.json { render json: @task, status: :created, location: @task }
       else
         format.html { render action: "new" }
@@ -60,7 +61,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to user_tasks_path(@user), notice: 'Task was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,7 +77,7 @@ class TasksController < ApplicationController
     @task.destroy
 
     respond_to do |format|
-      format.html { redirect_to tasks_url }
+      format.html { redirect_to user_tasks_path(@user), notice: 'Task was deleted.' }
       format.json { head :no_content }
     end
   end
@@ -88,5 +89,10 @@ class TasksController < ApplicationController
       format.html { render :index }
       format.json { render json: @tasks }
     end
+  end
+
+  private
+  def get_user
+    @user =User.find(params[:user_id])
   end
 end
