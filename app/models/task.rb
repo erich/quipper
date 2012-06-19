@@ -56,13 +56,15 @@ class Task
     self.active.count
   end
 
-  def self.filter(params)
-    if params[:completed]
-      self.completed
+  def self.search_and_filter(params)
+    if params[:completed] and params[:deadline]
+      self.completed.after_deadline.search_text(params[:search])
+    elsif params[:completed]
+      self.completed.search_text(params[:search])
     elsif params[:deadline]
-      self.after_deadline
+      self.after_deadline.search_text(params[:search])
     else 
-      all
+      all.search_text(params[:search])
     end
   end
 

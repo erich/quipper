@@ -82,8 +82,8 @@ class TasksController < ApplicationController
     end
   end
 
-  def filter
-    @tasks = Task.filter(params)
+  def search_and_filter
+    @tasks = Task.search_and_filter(params)
     @task = Task.new
     respond_to do |format|
       format.html { render :index }
@@ -93,6 +93,6 @@ class TasksController < ApplicationController
 
   private
   def get_user
-    @user =User.find(params[:user_id])
+    @user = User.find(params[:user_id])
   end
 end
